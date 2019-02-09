@@ -23,7 +23,7 @@ class Antlr4Custom < Formula
     
     (bin/"grun").write <<~EOS
       #!/bin/bash
-      java -classpath #{prefix}/antlr-#{version}-complete.jar:. org.antlr.v4.gui.TestRig "$@"
+      java -classpath #{prefix}/antlr-#{version}-complete.jar:./target/classes:. org.antlr.v4.gui.TestRig "$@"
     EOS
   end
 
