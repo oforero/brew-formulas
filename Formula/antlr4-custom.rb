@@ -16,6 +16,11 @@ class Antlr4Custom < Formula
       CLASSPATH="#{prefix}/antlr-#{version}-complete.jar:." exec java -jar #{prefix}/antlr-#{version}-complete.jar "$@"
     EOS
 
+    (bin/"antlr-javac").write <<~EOS
+      #!/bin/bash
+      CLASSPATH="#{prefix}/antlr-#{version}-complete.jar:." exec javac $@
+    EOS
+    
     (bin/"grun").write <<~EOS
       #!/bin/bash
       java -classpath #{prefix}/antlr-#{version}-complete.jar:. org.antlr.v4.gui.TestRig "$@"
