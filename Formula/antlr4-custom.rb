@@ -13,17 +13,22 @@ class Antlr4Custom < Formula
 
     (bin/"antlr").write <<~EOS
       #!/bin/bash
-      CLASSPATH="#{prefix}/antlr-#{version}-complete.jar:." exec java -jar #{prefix}/antlr-#{version}-complete.jar "$@"
+      CLASSPATH="#{prefix}/antlr-#{version}-complete.jar:./target/classes" exec java -jar #{prefix}/antlr-#{version}-complete.jar "$@"
     EOS
 
-    (bin/"antlr-javac").write <<~EOS
-      #!/bin/bash
-      CLASSPATH="#{prefix}/antlr-#{version}-complete.jar:." exec javac $@
-    EOS
-    
     (bin/"grun").write <<~EOS
       #!/bin/bash
       java -classpath #{prefix}/antlr-#{version}-complete.jar:./target/classes:. org.antlr.v4.gui.TestRig "$@"
+    EOS
+    
+    (bin/"antlr-javac").write <<~EOS
+      #!/bin/bash
+      CLASSPATH="#{prefix}/antlr-#{version}-complete.jar:./target/classes" exec javac -d target/classes$@
+    EOS
+    
+    (bin/"antlr-java").write <<~EOS
+      #!/bin/bash
+      CLASSPATH="#{prefix}/antlr-#{version}-complete.jar:./target/classes" exec javac $@
     EOS
   end
 
