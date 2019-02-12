@@ -28,7 +28,7 @@ class Antlr4Custom < Formula
     
     (bin/"antlr-java").write <<~EOS
       #!/bin/bash
-      CLASSPATH="#{prefix}/antlr-#{version}-complete.jar:./target/classes" exec javac $@
+      CLASSPATH="#{prefix}/antlr-#{version}-complete.jar:./target/classes" exec java $@
     EOS
   end
 
